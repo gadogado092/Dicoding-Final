@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">D Movie</string>
+    <string name="title_movie">Movie</string>
+    <string name="title_tv_show">Tv Show</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="language">Bahasa</string>
+
+    <string name="name_movie">Name Movie</string>
+    <string name="overview">Overview</string>
+    <string name="date_release">Date Release</string>
+    <string name="cast">Cast</string>
+    <string name="genre">Genre</string>
+    <string name="cd_image_poster">Poster Movie Or Tv Show</string>
+    <string name="response_error">Response Server Error</string>
+    <string name="lang">\"en-US\"</string>
+    <string name="_18">18+</string>
+    <string name="empty">Data Empty</string>
+    <string name="delete_from_favorite">Delete From Favorite</string>
+    <string name="add_to_favorite">Add To Favorite</string>
+    <string name="search_hint">Search Movie Or Tv Show</string>
+    <string name="search_movie">Search Movie</string>
+    <string name="search_tv">Search Tv Show</string>
+
+    <string name="appwidget_text">Movie Favorite</string>
+    <string name="empty_text">NO DATA</string>
+    <string name="title_release_reminder">Release Reminder</string>
+    <string name="note_release_reminder">Reminder Showing the movie that released today</string>
+    <string name="title_daily_reminder">Daily Reminder</string>
+    <string name="note_daily_reminder">Reminder for return to app</string>
+    <string name="setting">Setting</string>
+    <string name="msg_daily_reminder">D Movie missing you</string>
+    <string name="msg_release_today">has been release today</string>
+    <string name="time_release_reminder" translatable="false">08:00</string>
+    <string name="time_daily_reminder" translatable="false">07:00</string>
+    <string name="msg_no_release_today">No Movie Release Today</string>
+
+</resources>

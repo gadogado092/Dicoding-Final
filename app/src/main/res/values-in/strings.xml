@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">D Movie</string>
+    <string name="language">English</string>
+    <string name="cast">Pemeran</string>
+    <string name="date_release">Tanggal Release</string>
+    <string name="name_movie">Film</string>
+    <string name="overview">Kilasan Singkat</string>
+    <string name="title_movie">Film</string>
+    <string name="title_tv_show">Serial TV</string>
+    <string name="genre">Jenis Film</string>
+    <string name="cd_image_poster">Poster Film atau Serial Tv</string>
+    <string name="lang">\"id-ID\"</string>
+    <string name="response_error">Respon Server Bermasalah</string>
+    <string name="_18">18+</string>
+    <string name="title_favorite">Favorit</string>
+    <string name="empty">Data Kosong</string>
+    <string name="delete_from_favorite">Hapus Dari Favorit</string>
+    <string name="add_to_favorite">Ditambahkan Ke Favorit</string>
+    <string name="search_hint">Cari Film atau Serial Tv</string>
+    <string name="search_movie">Cari Film</string>
+    <string name="search_tv">Cari Serial Tv</string>
+    <string name="empty_text">Data Kosong</string>
+    <string name="note_daily_reminder">Pengingat Harian</string>
+    <string name="note_release_reminder">Pengingat film yang tayang hari ini</string>
+    <string name="appwidget_text">Film Favorit</string>
+    <string name="title_daily_reminder">Pengingat Harian</string>
+    <string name="title_release_reminder">Pengingat Tayang</string>
+    <string name="setting">Pengaturan</string>
+    <string name="msg_no_release_today">Tidak ada Movie rilis hari ini</string>
+    <string name="msg_release_today">rilis hari ini</string>
+    <string name="msg_daily_reminder">D Movie merindukanmu</string>
+</resources>
