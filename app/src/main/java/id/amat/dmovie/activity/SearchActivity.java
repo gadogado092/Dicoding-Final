@@ -162,4 +162,14 @@ public class SearchActivity extends AppCompatActivity implements DataView {
     public void onFailed(String error) {
         Toast.makeText(SearchActivity.this , error, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onSuccessRefresh(ArrayList<DataItem> listData) {
+
+    }
+
+    @Override
+    public void hideLoadingRefresh() {
+
+    }
 }

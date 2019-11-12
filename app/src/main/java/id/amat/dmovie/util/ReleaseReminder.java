@@ -200,4 +200,14 @@ public class ReleaseReminder extends BroadcastReceiver implements DataView {
     public void onFailed(String error) {
 
     }
+
+    @Override
+    public void onSuccessRefresh(ArrayList<DataItem> listData) {
+
+    }
+
+    @Override
+    public void hideLoadingRefresh() {
+
+    }
 }

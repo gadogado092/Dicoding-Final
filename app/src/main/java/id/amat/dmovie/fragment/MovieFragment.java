@@ -2,6 +2,7 @@ package id.amat.dmovie.fragment;
 
 
 import android.content.Intent;
+import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +41,9 @@ public class MovieFragment extends Fragment implements DataView {
     private DataAdapter dataAdapter;
     private String type;
     private final String STATE_LIST = "state_list";
-
+    private DataPresenter dataPresenter;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private int page;
     public MovieFragment() {
         this.type = "movie";
         // Required empty public constructor
@@ -56,14 +60,16 @@ public class MovieFragment extends Fragment implements DataView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        page = 1;
         rvMovie= view.findViewById(R.id.rv_movie);
+        swipeRefreshLayout= view.findViewById(R.id.swipeRefreshLayout);
         progressBar= view.findViewById(R.id.progress_bar);
         rvMovie.setHasFixedSize(true);
 
         showRecyclerList();
 
         if (savedInstanceState == null){
-            DataPresenter dataPresenter = new DataPresenter(this);
+            dataPresenter = new DataPresenter(this);
             if (type.equals("movie")){
                 dataPresenter.getDataList(HelperUrl.URL_MOVIE, type);
             }else if (type.equals("tv")){
@@ -76,6 +82,20 @@ public class MovieFragment extends Fragment implements DataView {
                 dataList.addAll(stateList);
             }
         }
+
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (type.equals("movie")){
+                    dataPresenter.getRefreshList(HelperUrl.URL_MOVIE, type);
+                }else if (type.equals("tv")){
+                    dataPresenter.getRefreshList(HelperUrl.URL_TV, type);
+                }
+
+            }
+        });
+
     }
     private void showSelectedMovie(DataItem movie){
         Intent detail = new Intent(getActivity(), DetailActivity.class);
@@ -127,5 +147,19 @@ public class MovieFragment extends Fragment implements DataView {
     @Override
     public void onFailed(String error) {
         Toast.makeText(getContext() , error, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSuccessRefresh(ArrayList<DataItem> listMovie) {
+        if (!listMovie.isEmpty()){
+            dataList.clear();
+            dataList.addAll(listMovie);
+            dataAdapter.refill(dataList);
+        }
+    }
+
+    @Override
+    public void hideLoadingRefresh() {
+        swipeRefreshLayout.setRefreshing(false);
     }
 }

@@ -127,4 +127,14 @@ public class TvFragment extends Fragment implements DataView {
     public void onFailed(String error) {
         Toast.makeText(getContext() , error, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onSuccessRefresh(ArrayList<DataItem> listData) {
+
+    }
+
+    @Override
+    public void hideLoadingRefresh() {
+
+    }
 }

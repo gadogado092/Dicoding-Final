@@ -146,6 +146,63 @@ public class DataPresenter {
                 });
     }
 
+    public void getRefreshList(String endPoint, final String type){
+        AndroidNetworking.get(endPoint)
+                .addQueryParameter("api_key", BuildConfig.TMDB_API_KEY)
+                .addQueryParameter("language", String.valueOf(R.string.lang))
+                .setTag(Movie.class)
+                .setPriority(Priority.IMMEDIATE)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            ArrayList<DataItem> dataItems = new ArrayList<>();
+                            JSONArray results = response.getJSONArray("results");
+                            for (int i=0; i<results.length(); i++){
+                                JSONObject data = results.getJSONObject(i);
+                                DataItem dataItem= new DataItem();
+                                dataItem.setDataId(data.getInt("id"));
+                                if (type.equals("movie")){
+                                    dataItem.setDataTitle(data.getString("original_title"));
+                                    dataItem.setDataReleaseDate(data.getString("release_date"));
+                                    dataItem.setDataAdult(data.getBoolean("adult"));
+                                }else if (type.equals("tv")){
+                                    dataItem.setDataTitle(data.getString("original_name"));
+                                    dataItem.setDataReleaseDate(data.getString("first_air_date"));
+                                    dataItem.setDataAdult(false);
+                                }
+
+                                ArrayList<Integer> genre = new ArrayList<>();
+                                JSONArray resultsGenre = data.getJSONArray("genre_ids");
+                                for (int j=0; j<resultsGenre.length(); j++){
+                                    genre.add(resultsGenre.getInt(j));
+                                }
+                                dataItem.setDataGenreId(genre);
+
+                                dataItem.setDataOverview(data.getString("overview"));
+                                dataItem.setDataPosterPath(data.getString("poster_path"));
+                                dataItems.add(dataItem);
+                            }
+                            view.hideLoadingRefresh();
+                            view.onSuccessRefresh(dataItems);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            view.hideLoadingRefresh();
+                            view.onFailed("Server Response Error");
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        view.hideLoadingRefresh();
+                        Log.d("ERROR", "onError: ", anError);
+                        view.onFailed("Server Response Error");
+                    }
+                });
+    }
+
     public void getReleaseToday (String endPoint, final String type, String date){
         view.showLoading();
         AndroidNetworking.get(endPoint)

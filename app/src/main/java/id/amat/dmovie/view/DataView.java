@@ -13,4 +13,9 @@ public interface DataView {
     void onSuccess(ArrayList<DataItem> listData);
 
     void onFailed(String error);
+
+    void onSuccessRefresh(ArrayList<DataItem> listData);
+
+    void hideLoadingRefresh();
+
 }

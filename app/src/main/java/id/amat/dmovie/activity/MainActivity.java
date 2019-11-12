@@ -18,11 +18,13 @@ import id.amat.dmovie.fragment.TvFragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -72,6 +74,12 @@ public class MainActivity extends BaseAppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+            setTheme(R.style.DarkTheme);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -126,6 +134,10 @@ public class MainActivity extends BaseAppCompatActivity {
             Intent detail = new Intent(MainActivity.this, SettingActivity.class);
             startActivity(detail);
             return true;
+        }else if (item.getItemId() == R.id.theme){
+            Toast.makeText(getApplicationContext(), "THEME CLICK", Toast.LENGTH_SHORT).show();
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            recreate();
         }
         return true;
 
